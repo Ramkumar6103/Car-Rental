@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 import bgvideo from '../assets/carvideo.mp4';
 
@@ -13,6 +14,8 @@ const LoginSignup = () => {
   const [signupPassword, setSignupPassword] = useState('');
   const [signupError, setSignupError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState('');
+
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setIsSignUp(!isSignUp);
@@ -32,8 +35,9 @@ const LoginSignup = () => {
       });
       const data = await response.json();
       if (data.success) {
-        // Login successful! Redirect or show welcome message
-        alert('Login successful!');
+        // Login successful! Set auth state and redirect to home page
+        localStorage.setItem('isLoggedIn', 'true');
+        navigate('/');
       } else {
         setLoginError(data.error || 'Login failed');
       }
