@@ -8,6 +8,12 @@ const LoginSignup = () => {
   const [loginPassword, setLoginPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
+  const [signupName, setSignupName] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [signupError, setSignupError] = useState('');
+  const [signupSuccess, setSignupSuccess] = useState('');
+
   const handleToggle = () => {
     setIsSignUp(!isSignUp);
   };
@@ -16,7 +22,7 @@ const LoginSignup = () => {
     e.preventDefault();
     setLoginError('');
     try {
-      const response = await fetch('/api/login.php', {
+      const response = await fetch('http://localhost/project/Project/api/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -33,6 +39,33 @@ const LoginSignup = () => {
       }
     } catch (err) {
       setLoginError('Network error');
+    }
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setSignupError('');
+    setSignupSuccess('');
+    try {
+      const response = await fetch('http://localhost/project/Project/api/register.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: signupEmail,
+          password: signupPassword
+        })
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSignupSuccess('Registration successful! You can now log in.');
+        setSignupName('');
+        setSignupEmail('');
+        setSignupPassword('');
+      } else {
+        setSignupError(data.error || 'Registration failed');
+      }
+    } catch (err) {
+      setSignupError('Network error');
     }
   };
 
@@ -78,10 +111,29 @@ const LoginSignup = () => {
               <button>F</button>
               <button>In</button>
             </div>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button className="btn-primary">Sign Up</button>
+            <form onSubmit={handleSignup}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={signupName}
+                onChange={e => setSignupName(e.target.value)}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={signupEmail}
+                onChange={e => setSignupEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={signupPassword}
+                onChange={e => setSignupPassword(e.target.value)}
+              />
+              <button className="btn-primary" type="submit">Sign Up</button>
+              {signupError && <div className="error">{signupError}</div>}
+              {signupSuccess && <div className="success">{signupSuccess}</div>}
+            </form>
           </div>
         </div>
 
