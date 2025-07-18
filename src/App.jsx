@@ -7,6 +7,8 @@ import About from './component/About';
 import ScrollToTopButton from './component/ScrollToTopButton';
 import Footer from './component/Footer';
 import Auth from './Page/Auth'; // login/signup
+import FleetPage from './component/FleetPage';
+import CarDetailPage from './component/CarDetailPage';
 
 const App = () => {
   return (
@@ -29,6 +31,12 @@ const App = () => {
 
         {/* Auth Route */}
         <Route path="/auth" element={<Auth />} />
+
+        {/* Fleet Route */}
+        <Route path="/fleet" element={<FleetPage />} />
+
+        {/* Car Detail Route */}
+        <Route path="/fleet/:carId" element={<CarDetailPage />} />
       </Routes>
     </Router>
   );

@@ -180,3 +180,41 @@
   font-size: 14px;
   color: #000;
 }
+
+/* Bookings Table Styles */
+table.bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  color: #222;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+table.bookings-table th {
+  background: #220cac;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px 8px;
+  text-align: center;
+}
+table.bookings-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+table.bookings-table tr:last-child td {
+  border-bottom: none;
+}
+table.bookings-table tr:hover {
+  background: #f3f6ff;
+}
+
+/* Responsive table */
+@media (max-width: 900px) {
+  table.bookings-table th, table.bookings-table td {
+    font-size: 13px;
+    padding: 8px 4px;
+  }
+}

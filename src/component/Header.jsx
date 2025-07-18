@@ -26,7 +26,7 @@ function Header() {
     <header className="header">
       <div className="logo">HYUNDAI</div>
       <nav className="nav-links">
-        <a href="#fleet">Car Fleet</a>
+        <Link to="/fleet">Car Fleet</Link>
         <a href="#about">About us</a>
         <a href="#services">Services</a>
         <a href="#contact us">Contact us</a>
